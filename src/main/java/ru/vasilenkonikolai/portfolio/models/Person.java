@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class Person {
@@ -42,6 +44,9 @@ public class Person {
     @Column(name = "phone_number")
     @Size(min = 10, max = 10)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "author")
+    private List<Project> projects;
 
 
     public Person(String username, String name, String surname, String password, String email, String phoneNumber) {
@@ -122,6 +127,14 @@ public class Person {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
 
